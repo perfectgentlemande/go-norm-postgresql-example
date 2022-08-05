@@ -14,7 +14,9 @@ func main() {
 	ctx := context.Background()
 	log := logger.DefaultLogger()
 
-	dbUser, err := dbuser.NewDatabase(ctx, "postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable", dbUserMigrations.MigrationAssets)
+	dbUser, err := dbuser.NewDatabase(ctx, &dbuser.Config{
+		ConnStr: "postgres://postgres:postgres@postgres:5432/postgres?sslmode=disable",
+	}, dbUserMigrations.MigrationAssets)
 	if err != nil {
 		log.WithError(err).Fatal("cannot create db")
 	}
@@ -22,7 +24,7 @@ func main() {
 
 	err = dbUser.Ping(ctx)
 	if err != nil {
-		log.WithField("conn_string", *configPath).WithError(err).Error("cannot ping db")
+		log.WithError(err).Error("cannot ping db")
 		return
 	}
 }
