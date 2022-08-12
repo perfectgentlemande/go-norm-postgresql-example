@@ -116,8 +116,7 @@ INSERT INTO phone (
 	'e27fe21d-7f30-470a-b875-6f9ab6f9dbe9',
 	'faf99aaf-cb8c-4f66-b541-d52fd648022d',
 	'143d9a9b-3413-41da-a52b-7cae3253f5ef'
-)
-,(
+),(
 	'67fb7c81-d6e7-455e-be16-be066ec3a9b3',
 	'+70000000004',
 	'e27fe21d-7f30-470a-b875-6f9ab6f9dbe9',
@@ -129,11 +128,109 @@ INSERT INTO phone (
 	'91035d35-7d47-4e82-8ce2-72c1e4218ac8',
 	'3529c98b-39e9-46e3-a36b-f06b679a779e',
 	'03d9bd09-5c8c-4b13-9d20-55eaeca19d4c'
-)
-,(
+),(
 	'e26a388c-729f-42ef-a3a9-2e45d2e871ae',
 	'+70000000006',
 	'91035d35-7d47-4e82-8ce2-72c1e4218ac8',
 	'ee047fa5-b501-410a-a304-58849b368c1e',
 	'd6a6a96f-3034-443e-8b3d-c88dbe1ef0bd'
-)
+);
+
+INSERT INTO  states (
+    state_id,
+	state_name
+) VALUES (
+	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'CA'
+),(
+	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'TX'
+),(
+	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'TN'
+),(
+	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'IL'
+),(
+	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'NY'
+);
+
+INSERT INTO address_priority (
+	address_priority_id,
+	address_priority
+) VALUES (
+	'5ebf14a5-1e94-45ef-bb27-386185acf656',
+	'pr 1'
+),(
+	'c09c7431-3e28-4602-b9d7-03294fb1fb4b',
+	'pr 2'
+),(
+	'ac122638-d877-498d-b4a5-03a753219720',
+	'pr 3'
+);
+
+INSERT INTO address(
+	address_id,
+	city,
+	state_id,
+	zip,
+	address_priority_id,
+	user_account_id,
+	address_line1,
+	address_line2
+)  VALUES (
+	'd542c691-3b8c-4441-900c-9dfc2b6a3add',
+	'Sacramento',
+	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'125252',
+	'5ebf14a5-1e94-45ef-bb27-386185acf656',
+	'bb34822f-d1b9-4f5e-9ff4-b1c1bb301e63',
+	'8 Piece Of Sheet Rd.',
+	NULL
+),(
+	'cc4b75ac-81fd-40d9-93df-55c726f6113c',
+	'Houston',
+	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'678170',
+	'c09c7431-3e28-4602-b9d7-03294fb1fb4b',
+	'e27fe21d-7f30-470a-b875-6f9ab6f9dbe9',
+	'7/1 Redneck Av.',
+	NULL
+),(
+	'0b31e132-d946-49c0-b9e9-2039950baad7',
+	'Los Angeles',
+	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'125363',
+	'ac122638-d877-498d-b4a5-03a753219720',
+	'91035d35-7d47-4e82-8ce2-72c1e4218ac8',
+	'8/9 Dicks blvd.',
+	NULL
+),(
+	'5a757478-e89e-48c5-aea9-8908888cd2ca',
+	'Dallas',
+	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'678174',
+	'5ebf14a5-1e94-45ef-bb27-386185acf656',
+	'bb34822f-d1b9-4f5e-9ff4-b1c1bb301e63',
+	'8/9 Sack Madeek str.',
+	NULL
+),(
+	'8a67939e-2f75-4025-8f84-ca0624a9ed21',
+	'San Diego',
+	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'125364',
+	'c09c7431-3e28-4602-b9d7-03294fb1fb4b',
+	'e27fe21d-7f30-470a-b875-6f9ab6f9dbe9',
+	'12/3 W. Gina str.',
+	NULL
+),(
+	'a0ff2fa3-2dc2-4de8-b6bd-eb057bf650e5',
+	'San Antonio',
+	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'678175',
+	'ac122638-d877-498d-b4a5-03a753219720',
+	'91035d35-7d47-4e82-8ce2-72c1e4218ac8',
+	'8/9 Bandera rd.',
+	NULL
+);

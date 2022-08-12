@@ -52,5 +52,9 @@ CREATE TABLE address(
     address_priority_id uuid NOT NULL,
     user_account_id uuid NOT NULL,
     address_line1 character varying,
-    address_line2 character varying
+    address_line2 character varying,
+    FOREIGN KEY (address_priority_id)
+        REFERENCES address_priority (address_priority_id),
+    FOREIGN KEY (user_account_id)
+        REFERENCES user_account (user_account_id)
 );
