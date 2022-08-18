@@ -140,19 +140,19 @@ INSERT INTO  states (
     state_id,
 	state_name
 ) VALUES (
-	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'30b628fc-019e-4eab-83bf-a158dcb8c26d',
 	'CA'
 ),(
-	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'c5141c54-0f94-4da1-a2b0-649b78a1fba1',
 	'TX'
 ),(
-	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'db7dff71-45c6-4aa2-917f-6f19167b20e6',
 	'TN'
 ),(
-	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'a68f08af-d10a-43a7-8060-a3378b34bf8c',
 	'IL'
 ),(
-	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'e8aa2116-e535-46f5-802b-8bb2127d517e',
 	'NY'
 );
 
@@ -182,7 +182,7 @@ INSERT INTO address(
 )  VALUES (
 	'd542c691-3b8c-4441-900c-9dfc2b6a3add',
 	'Sacramento',
-	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'30b628fc-019e-4eab-83bf-a158dcb8c26d',
 	'125252',
 	'5ebf14a5-1e94-45ef-bb27-386185acf656',
 	'bb34822f-d1b9-4f5e-9ff4-b1c1bb301e63',
@@ -191,7 +191,7 @@ INSERT INTO address(
 ),(
 	'cc4b75ac-81fd-40d9-93df-55c726f6113c',
 	'Houston',
-	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'c5141c54-0f94-4da1-a2b0-649b78a1fba1',
 	'678170',
 	'c09c7431-3e28-4602-b9d7-03294fb1fb4b',
 	'e27fe21d-7f30-470a-b875-6f9ab6f9dbe9',
@@ -200,7 +200,7 @@ INSERT INTO address(
 ),(
 	'0b31e132-d946-49c0-b9e9-2039950baad7',
 	'Los Angeles',
-	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'30b628fc-019e-4eab-83bf-a158dcb8c26d',
 	'125363',
 	'ac122638-d877-498d-b4a5-03a753219720',
 	'91035d35-7d47-4e82-8ce2-72c1e4218ac8',
@@ -209,7 +209,7 @@ INSERT INTO address(
 ),(
 	'5a757478-e89e-48c5-aea9-8908888cd2ca',
 	'Dallas',
-	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'c5141c54-0f94-4da1-a2b0-649b78a1fba1',
 	'678174',
 	'5ebf14a5-1e94-45ef-bb27-386185acf656',
 	'bb34822f-d1b9-4f5e-9ff4-b1c1bb301e63',
@@ -218,7 +218,7 @@ INSERT INTO address(
 ),(
 	'8a67939e-2f75-4025-8f84-ca0624a9ed21',
 	'San Diego',
-	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'30b628fc-019e-4eab-83bf-a158dcb8c26d',
 	'125364',
 	'c09c7431-3e28-4602-b9d7-03294fb1fb4b',
 	'e27fe21d-7f30-470a-b875-6f9ab6f9dbe9',
@@ -227,7 +227,7 @@ INSERT INTO address(
 ),(
 	'a0ff2fa3-2dc2-4de8-b6bd-eb057bf650e5',
 	'San Antonio',
-	'53edb064-4a48-4010-9718-be347b47f0f2',
+	'c5141c54-0f94-4da1-a2b0-649b78a1fba1',
 	'678175',
 	'ac122638-d877-498d-b4a5-03a753219720',
 	'91035d35-7d47-4e82-8ce2-72c1e4218ac8',
