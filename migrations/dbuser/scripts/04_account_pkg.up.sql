@@ -79,11 +79,11 @@ end;
 $BODY$;
 
 create or replace function account_search_by_id(p_account_id bigint)
-returns account_record[]
+returns norm.account_record[]
   language 'plpgsql'
 as $BODY$
 declare
-v_result account_record[];
+v_result norm.account_record[];
 v_sql text;
 begin
 select array_agg(single_item)
@@ -97,19 +97,19 @@ select array_agg(single_item)
           (select array_agg(row(phone_id,
                         phone,
                         p.phone_type_id,
-                        phone_type )::phone_record)
-                        from phone p 
-                             join phone_type pt using(phone_type_id)
+                        phone_type )::norm.phone_record)
+                        from norm.phone p 
+                             join norm.phone_type pt using(phone_type_id)
                          where p.account_id=a.account_id),
            (select array_agg(row(email_id,
                         email,
                         e.email_priority_id,
-                        email_priority )::email_record)
-                        from email e 
-                             join email_priority ep using(email_priority_id)
+                        email_priority )::norm.email_record)
+                        from norm.email e 
+                             join norm.email_priority ep using(email_priority_id)
                          where e.account_id=a.account_id)
-                         )::account_record as single_item 
-           from account a 
+                         )::norm.account_record as single_item 
+           from norm.account a 
               where a.account_id=p_account_id )s
          into v_result;
     return (v_result);
@@ -133,19 +133,19 @@ $BODY$;
 --set search_path to norm;
 
 create or replace function account_search(p_search_json json)
-returns account_record[]
+returns norm.account_record[]
   language 'plpgsql'
 as $BODY$
 declare
 v_search_condition text:=null;
 --v_json_rec account_record;
 v_sql text;
-result account_record[];
+result norm.account_record[];
 v_rec record;
 v_where_account text;
 v_where_email text;
 v_where_phone text;
-v_result account_record[];
+v_result norm.account_record[];
 begin
 for v_rec in	
  (select * from json_each_text(p_search_json) )
@@ -192,18 +192,18 @@ select array_agg(single_item)
                         phone,
                         p.phone_type_id,
                         phone_type )::phone_record)
-                        from phone p 
-                             join phone_type pt using(phone_type_id)
+                        from norm.phone p 
+                             join norm.phone_type pt using(phone_type_id)
                          where p.account_id=a.account_id),
            (select array_agg(row(email_id,
                         email,
                         e.email_priority_id,
                         email_priority )::email_record)
-                        from email e 
-                             join email_priority ep using(email_priority_id)
+                        from norm.email e 
+                             join norm.email_priority ep using(email_priority_id)
                          where e.account_id=a.account_id)
                          )::account_record as single_item 
-           from account a 
+           from norm.account a 
               where a.account_id in (
               $sql$||
               v_search_condition||
@@ -225,7 +225,7 @@ as
 $BODY$
 begin
 return query (
-select * from array_transport(account_search(p_search_json)));
+select * from norm.array_transport(norm.account_search(p_search_json)));
 end;
 
 $BODY$; 
