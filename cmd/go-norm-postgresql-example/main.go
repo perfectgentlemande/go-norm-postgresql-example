@@ -6,6 +6,7 @@ import (
 	"github.com/perfectgentlemande/go-norm-postgresql-example/internal/database/dbuser"
 	"github.com/perfectgentlemande/go-norm-postgresql-example/internal/logger"
 	dbUserMigrations "github.com/perfectgentlemande/go-norm-postgresql-example/migrations/dbuser"
+	"github.com/sirupsen/logrus"
 
 	_ "github.com/jackc/pgx/v4/stdlib"
 )
@@ -27,4 +28,29 @@ func main() {
 		log.WithError(err).Error("cannot ping db")
 		return
 	}
+
+	newAcc, err := dbUser.CreateAccount(ctx, &dbuser.AccountToCreate{
+		Username:    "johnsmithaccount",
+		LastName:    "john",
+		FirstName:   "smith",
+		DateOfBirth: "1991-04-01",
+		Phones: []dbuser.PhoneToCreate{
+			{
+				Phone:       "3123334556",
+				PhoneTypeID: "1",
+			},
+		},
+	})
+	if err != nil {
+		log.WithError(err).Error("cannot create account")
+		return
+	}
+
+	log.WithFields(logrus.Fields{
+		"account_id": newAcc.AccountID,
+		"username":   newAcc.Username,
+		"last_name":  newAcc.LastName,
+		"first_name": newAcc.FirstName,
+		"phones":     newAcc.Phones,
+	}).Info("created account")
 }

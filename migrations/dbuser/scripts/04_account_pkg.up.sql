@@ -32,7 +32,7 @@ as $BODY$
 declare
 v_rec record;
 v_account_id bigint;
-v_account_rec account_record;
+v_account_rec norm.account_record;
 v_phones_array text;
 v_phone_rec record;
 v_phone_id bigint;
@@ -54,26 +54,26 @@ for v_rec in
 end  case;
 end loop;
 ---create account
-insert into account (username, last_name, first_name, dob)
+insert into norm.account (username, last_name, first_name, dob)
   values (v_account_rec.username, v_account_rec.last_name, v_account_rec.first_name, v_account_rec.dob)
     returning account_id into v_account_id;
 --create phones
 for v_phone_rec in (select * from json_to_recordset(v_phones_array::json)
                      as phone(phone text, phone_type_id int ) 
                      ) loop
-            insert into phone (account_id, phone, phone_type_id)  
+            insert into norm.phone (account_id, phone, phone_type_id)  
                 values (v_account_id,  v_phone_rec.phone, v_phone_rec.phone_type_id);    
 end  loop;
 --create emails
 for v_email_rec in (select * from json_to_recordset(v_emails_array::json)
                      as email(email_address text, email_priority_id int ) 
                      ) loop
-            insert into email (account_id, email, email_priority_id)  
+            insert into norm.email (account_id, email, email_priority_id)  
                 values (v_account_id,  v_email_rec.email_addressr, v_email_rec.email_priority_id);    
 end  loop;
 
 return query (
-select * from array_transport(account_search_by_id(v_account_id)));
+select * from norm.array_transport(norm.account_search_by_id(v_account_id)));
 end;
 
 $BODY$;
@@ -124,7 +124,7 @@ as
 $BODY$
 begin
 return query (
-select * from array_transport(account_search_by_id(p_account_id)));
+select * from norm.array_transport(norm.account_search_by_id(p_account_id)));
 end;
 
 $BODY$; 
@@ -170,12 +170,12 @@ for v_rec in
   end case; 
   end loop; 
 v_search_condition:=concat_ws(' intersect ',  
-$$select a1.account_id from account a1
+$$select a1.account_id from norm.account a1
   where $$||
   v_where_account,
- $$select account_id from phone where $$ ||
+ $$select account_id from norm.phone where $$ ||
     v_where_phone ,
-    $$select account_id from email
+    $$select account_id from norm.email
 where $$||
 v_where_email);
 
@@ -191,18 +191,18 @@ select array_agg(single_item)
           (select array_agg(row(phone_id,
                         phone,
                         p.phone_type_id,
-                        phone_type )::phone_record)
+                        phone_type )::norm.phone_record)
                         from norm.phone p 
                              join norm.phone_type pt using(phone_type_id)
                          where p.account_id=a.account_id),
            (select array_agg(row(email_id,
                         email,
                         e.email_priority_id,
-                        email_priority )::email_record)
+                        email_priority )::norm.email_record)
                         from norm.email e 
                              join norm.email_priority ep using(email_priority_id)
                          where e.account_id=a.account_id)
-                         )::account_record as single_item 
+                         )::norm.account_record as single_item 
            from norm.account a 
               where a.account_id in (
               $sql$||
@@ -334,7 +334,7 @@ for v_email_rec in (select  * from json_array_elements_text(v_emails_array::json
 end loop; ---for all emails
 
 return query (
-select * from array_transport(account_search_by_id(p_account_id)));
+select * from norm.array_transport(norm.account_search_by_id(p_account_id)));
 end;
 
 $BODY$;
