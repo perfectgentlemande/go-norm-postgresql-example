@@ -53,4 +53,18 @@ func main() {
 		"first_name": newAcc.FirstName,
 		"phones":     newAcc.Phones,
 	}).Info("created account")
+
+	acc, err := dbUser.GetAccountByID(ctx, 1)
+	if err != nil {
+		log.WithError(err).Error("cannot get account by id")
+		return
+	}
+	log.WithFields(logrus.Fields{
+		"account_id":      acc.AccountID,
+		"username":        acc.Username,
+		"last_name":       acc.LastName,
+		"first_name":      acc.FirstName,
+		"phones":          acc.Phones,
+		"email_addresses": acc.EmailAddresses,
+	}).Info("got account")
 }
