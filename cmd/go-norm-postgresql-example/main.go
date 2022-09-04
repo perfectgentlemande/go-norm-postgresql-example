@@ -11,6 +11,10 @@ import (
 	_ "github.com/jackc/pgx/v4/stdlib"
 )
 
+func strToPtr(v string) *string {
+	return &v
+}
+
 func main() {
 	ctx := context.Background()
 	log := logger.DefaultLogger()
@@ -67,5 +71,141 @@ func main() {
 		"email_addresses": acc.EmailAddresses,
 	}).Info("got account")
 
-	accs, err := dbuser.ListAcccounts()
+	accs, err := dbUser.ListAcccounts(ctx, &dbuser.ListAccountsParams{
+		LastName: strToPtr("john"),
+		Username: strToPtr("ali"),
+	})
+	if err != nil {
+		log.WithError(err).Error("cannot list accounts")
+		return
+	}
+	for i := range accs {
+		log.WithFields(logrus.Fields{
+			"account_id":      accs[i].AccountID,
+			"username":        accs[i].Username,
+			"last_name":       accs[i].LastName,
+			"first_name":      accs[i].FirstName,
+			"phones":          accs[i].Phones,
+			"email_addresses": accs[i].EmailAddresses,
+		}).Info("listed account")
+	}
+	log.Info("list account done")
+
+	accs, err = dbUser.ListAcccounts(ctx, &dbuser.ListAccountsParams{
+		LastName: strToPtr("john"),
+	})
+	if err != nil {
+		log.WithError(err).Error("cannot list accounts")
+		return
+	}
+	for i := range accs {
+		log.WithFields(logrus.Fields{
+			"account_id":      accs[i].AccountID,
+			"username":        accs[i].Username,
+			"last_name":       accs[i].LastName,
+			"first_name":      accs[i].FirstName,
+			"phones":          accs[i].Phones,
+			"email_addresses": accs[i].EmailAddresses,
+		}).Info("listed account")
+	}
+	log.Info("list account done")
+
+	accs, err = dbUser.ListAcccounts(ctx, &dbuser.ListAccountsParams{
+		LastName: strToPtr("john"),
+		Username: strToPtr("john"),
+	})
+	if err != nil {
+		log.WithError(err).Error("cannot list accounts")
+		return
+	}
+	for i := range accs {
+		log.WithFields(logrus.Fields{
+			"account_id":      accs[i].AccountID,
+			"username":        accs[i].Username,
+			"last_name":       accs[i].LastName,
+			"first_name":      accs[i].FirstName,
+			"phones":          accs[i].Phones,
+			"email_addresses": accs[i].EmailAddresses,
+		}).Info("listed account")
+	}
+	log.Info("list account done")
+
+	accs, err = dbUser.ListAcccounts(ctx, &dbuser.ListAccountsParams{
+		FirstName: strToPtr("john"),
+		Username:  strToPtr("john"),
+	})
+	if err != nil {
+		log.WithError(err).Error("cannot list accounts")
+		return
+	}
+	for i := range accs {
+		log.WithFields(logrus.Fields{
+			"account_id":      accs[i].AccountID,
+			"username":        accs[i].Username,
+			"last_name":       accs[i].LastName,
+			"first_name":      accs[i].FirstName,
+			"phones":          accs[i].Phones,
+			"email_addresses": accs[i].EmailAddresses,
+		}).Info("listed account")
+	}
+	log.Info("list account done")
+
+	accs, err = dbUser.ListAcccounts(ctx, &dbuser.ListAccountsParams{
+		Username: strToPtr("alic"),
+		Phone:    strToPtr("202"),
+	})
+	if err != nil {
+		log.WithError(err).Error("cannot list accounts")
+		return
+	}
+	for i := range accs {
+		log.WithFields(logrus.Fields{
+			"account_id":      accs[i].AccountID,
+			"username":        accs[i].Username,
+			"last_name":       accs[i].LastName,
+			"first_name":      accs[i].FirstName,
+			"phones":          accs[i].Phones,
+			"email_addresses": accs[i].EmailAddresses,
+		}).Info("listed account")
+	}
+	log.Info("list account done")
+
+	accs, err = dbUser.ListAcccounts(ctx, &dbuser.ListAccountsParams{
+		Phone: strToPtr("202"),
+	})
+	if err != nil {
+		log.WithError(err).Error("cannot list accounts")
+		return
+	}
+	for i := range accs {
+		log.WithFields(logrus.Fields{
+			"account_id":      accs[i].AccountID,
+			"username":        accs[i].Username,
+			"last_name":       accs[i].LastName,
+			"first_name":      accs[i].FirstName,
+			"phones":          accs[i].Phones,
+			"email_addresses": accs[i].EmailAddresses,
+		}).Info("listed account")
+	}
+	log.Info("list account done")
+
+	accs, err = dbUser.ListAcccounts(ctx, &dbuser.ListAccountsParams{
+		LastName: strToPtr("john"),
+		Email:    strToPtr("john"),
+	})
+	if err != nil {
+		log.WithError(err).Error("cannot list accounts")
+		return
+	}
+	for i := range accs {
+		log.WithFields(logrus.Fields{
+			"account_id":      accs[i].AccountID,
+			"username":        accs[i].Username,
+			"last_name":       accs[i].LastName,
+			"first_name":      accs[i].FirstName,
+			"phones":          accs[i].Phones,
+			"email_addresses": accs[i].EmailAddresses,
+		}).Info("listed account")
+	}
+	log.Info("list account done")
 }
