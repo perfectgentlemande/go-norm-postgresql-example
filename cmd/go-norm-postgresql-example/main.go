@@ -45,7 +45,6 @@ func main() {
 		log.WithError(err).Error("cannot create account")
 		return
 	}
-
 	log.WithFields(logrus.Fields{
 		"account_id": newAcc.AccountID,
 		"username":   newAcc.Username,
@@ -67,4 +66,6 @@ func main() {
 		"phones":          acc.Phones,
 		"email_addresses": acc.EmailAddresses,
 	}).Info("got account")
+
+	accs, err := dbuser.ListAcccounts()
 }

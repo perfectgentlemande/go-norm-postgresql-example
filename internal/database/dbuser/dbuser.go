@@ -89,3 +89,40 @@ func (d *Database) GetAccountByID(ctx context.Context, id int) (Account, error) 
 
 	return res, nil
 }
+
+type ListAccountsParams struct {
+	LastName  *string `json:"last_name,omitempty"`
+	Username  *string `json:"username,omitempty"`
+	FirstName *string `json:"first_name,omitempty"`
+	Phone     *string `json:"phone,omitempty"`
+	Email     *string `json:"email,omitempty"`
+}
+
+func (d *Database) ListAcccounts(ctx context.Context, params *ListAccountsParams) ([]Account, error) {
+	query := `select * from norm.account_select('%s'::json)`
+
+	data, err := json.Marshal(params)
+	if err != nil {
+		return nil, fmt.Errorf("cannot marshal list accounts params: %w", err)
+	}
+
+	var rawRes []string
+	err = d.db.SelectContext(ctx, &rawRes, fmt.Sprintf(query, string(data)))
+	if err != nil {
+		return nil, fmt.Errorf("cannot select accounts: %w", err)
+	}
+
+	res := make([]Account, 0, len(rawRes))
+	for i := range rawRes {
+		rec := Account{}
+
+		err = json.Unmarshal([]byte(rawRes[i]), &rec)
+		if err != nil {
+			return nil, fmt.Errorf("cannot unmarshal result: %w", err)
+		}
+
+		res = append(res, rec)
+	}
+
+	return res, nil
+}
